@@ -33,12 +33,14 @@ if [ -f $DIR/apt-packages ]; then
     apt-get install -y \$PACKAGES
     echo "-----> Injected packages: \$PACKAGES"
 fi
+echo "------- starting wget block"
 if [ -f $DIR/wget-packages ]; then
-    WGET=\$(cat "$DIR/wget-packages" | tr "\\n" " ")
     cat "$DIR/wget-packages" | while read instr; do
         if [ -n "\$instr" ]; then
+            echo \$instr | echo "--- none"
             \$instr | echo "---> done"
         fi
+    done
     echo "-----> Injected packages: \$WGET"
 fi
 if [ -d $DIR/dpkg-packages ]; then
