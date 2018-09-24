@@ -32,10 +32,10 @@ if [ -f $DIR/apt-packages ]; then
     echo "-----> Injected packages: \$PACKAGES"
 fi
 if [ -f $DIR/wget-packages ]; then
-    WGET=\$(cat "$DIR/wget-packages")
+    WGET=\$(cat "$DIR/wget-packages" | tr "\\n" " ")
     cat "$DIR/wget-packages" | while read instr; do
         if [ -n "\$instr" ]; then
-            echo \$instr
+            \$instr | echo "---> done"
         fi
     echo "-----> Injected packages: \$WGET"
 fi
