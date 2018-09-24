@@ -9,9 +9,11 @@ DIR=/app
 
 COMMAND=$(cat <<EOF
 export DEBIAN_FRONTEND=noninteractive
+
+apt-get update
+apt-get install -y software-properties-common apt-transport-https wget
+
 if [ -f $DIR/apt-repositories ]; then
-    apt-get update
-    apt-get install -y software-properties-common apt-transport-https wget
     cat "$DIR/apt-repositories" | while read repository; do
         if [ -n "\$repository" ]; then
             add-apt-repository -y "\$repository"
